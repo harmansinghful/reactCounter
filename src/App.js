@@ -47,6 +47,21 @@ class App extends Component {
     this.setState({ counters });
   };
 
+  handleDecrement = counter => {
+    //Clone the state's counters array into a constant
+    const counters = [...this.state.counters];
+
+    //find the index of passed counter in the cloned array
+    const index = counters.indexOf(counter);
+
+    //Clone the passed counter into the array of cloned state counters
+    counters[index] = { ...counter };
+
+    //Increment the value of cloned counter
+    counters[index].value--;
+
+    this.setState({ counters });
+  };
   handleReset = () => {
     const counters = this.state.counters.map(c => {
       c.value = 0;
@@ -70,6 +85,7 @@ class App extends Component {
           <Counters
             counters={this.state.counters}
             onIncrement={this.handleIncrement}
+            onDecrement={this.handleDecrement}
             onReset={this.handleReset}
             onDelete={this.handleDelete}
           />
